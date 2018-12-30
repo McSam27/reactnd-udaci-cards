@@ -1,15 +1,15 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
-import { RkCard, RkTheme } from "react-native-ui-kitten";
+import { RkCard } from "react-native-ui-kitten";
 
-export default function DeckCard() {
+export default function DeckCard({title, totalQuestions, ...rest}) {
   return (
-    <RkCard rkType="shadowed">
+    <RkCard rkType="shadowed" {...rest}>
       <View rkCardHeader>
-        <Text style={styles.cardHeader}>Quiz Deck Name</Text>
+        <Text style={styles.cardHeader}>{title}</Text>
       </View>
       <View rkCardContent>
-        <Text>2 questions</Text>
+        <Text>{totalQuestions.toString()} question(s)</Text>
       </View>
     </RkCard>
   );
@@ -17,6 +17,9 @@ export default function DeckCard() {
 
 const styles = StyleSheet.create({
   cardHeader: {
-      color: RkTheme.current.colors.text.base,
+      fontSize: 18,
+  },
+  cardContent: {
+    color: "#151618",
   },
 });
