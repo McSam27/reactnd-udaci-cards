@@ -18,7 +18,7 @@ class AddNewQuizScreen extends React.Component {
   handleCreateDeck = () => {
     const { text } = this.state;
     if (text.length !== 0) {
-      saveDeckTitle(text)
+      saveDeckTitle(text.trim())
         .then(() => {
           this.props.navigation.navigate('Home');
         });

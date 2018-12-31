@@ -10,39 +10,50 @@ import {
 import DeckCard from "./DeckCard";
 import PageHeader from "./PageHeader";
 import { RkButton, RkTheme } from "react-native-ui-kitten";
-import { getDecks, saveDeckTitle, clearData, getDeck } from '../utils/api';
+import { getDecks, } from '../utils/api';
+
+
+RkTheme.setType("RkText", "hero", {
+  fontSize: 32,
+});
+RkTheme.setType("RkButton", "outline-warning", {
+  borderColor: "#feb401",
+  borderWidth: 1,
+  color: "#feb401",
+  backgroundColor: "#ffffff",
+});
 
 class HomeScreen extends React.Component {
-
-  componentDidMount = () => {
-    // clearData();
+  constructor() {
+    super();
+    this.state = { decks: {} };
   }
 
+  async componentDidMount () {
+    let decks = await getDecks();
+    this.setState({ decks });
+  }
 
   render() {
-
-    getDecks();
-    getDeck("Test");
-
-    RkTheme.setType("RkText", "hero", {
-      fontSize: 32,
-    });
-    RkTheme.setType("RkButton", "outline-warning", {
-      borderColor: "#feb401",
-      borderWidth: 1,
-      color: "#feb401",
-      backgroundColor: "#ffffff",
-    });
+    const { decks } = this.state;
 
     return (
       <View style={styles.container}>
         <PageHeader>FlashQuiz</PageHeader>
         <View style={styles.grid}>
-          <DeckCard
-            title={"Quiz One"}
-            totalQuestions={5}
-            onPress={() => this.props.navigation.navigate("Quiz")}
-          />
+        {
+          Object.keys(decks).map(deck => {
+            const {title, questions} = decks[deck];
+            return (
+              <DeckCard
+                key={`${title}-quiz`}
+                title={title}
+                totalQuestions={questions.length}
+                onPress={() => this.props.navigation.navigate("Quiz")}
+              />
+            )
+          })
+        }
         </View>
         <RkButton
           rkType="info stretch"

@@ -1,31 +1,59 @@
-import { AsyncStorage } from "react-native";
+import {
+  AsyncStorage
+} from "react-native";
+
+const STORAGE_KEY = "@UdaciCardStore:quiz";
+
+const DUMMY_DATA = {
+  React: {
+    title: 'React',
+    questions: [{
+        question: 'What is React?',
+        answer: 'A library for managing user interfaces'
+      },
+      {
+        question: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event'
+      }
+    ]
+  },
+  JavaScript: {
+    title: 'JavaScript',
+    questions: [{
+      question: 'What is a closure?',
+      answer: 'The combination of a function and the lexical environment within which that function was declared.'
+    }]
+  }
+};
 
 export const clearData = async () => {
-    try {
-        await AsyncStorage.clear();
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// return all of the decks along with their titles, questions, and answers.
-export const getDecks = async () => {
   try {
-    const i = await AsyncStorage.getAllKeys();
-    console.log(i);
+    await AsyncStorage.clear();
   } catch (error) {
-    // Error saving data
     console.log(error);
   }
 };
 
+
+// return all of the decks along with their titles, questions, and answers.
+
+export const getDecks = () => {
+  return AsyncStorage.getItem(STORAGE_KEY)
+    .then(res => {
+      if (res !== null) {
+        return JSON.parse(res);
+      } else {
+        return DUMMY_DATA;
+      }
+    });
+}
+
 // take in a single id argument and return the deck associated with that id
-export const getDeck = async (id) => {
+export const getDeck = async id => {
   try {
-    const value = await AsyncStorage.getItem(id);
+    const value = await AsyncStorage.getItem(STORAGE_KEY);
     if (value !== null) {
-      // We have data!!
-      console.log(value);
+      return value[id];
     }
   } catch (error) {
     // Error retrieving data
@@ -33,37 +61,17 @@ export const getDeck = async (id) => {
 };
 
 // take in a single id argument and return the deck associated with that id
-export const saveDeckTitle = async (id) => {
-  try {
-    let deckObject = {
-        title: id,
-    };
+export const saveDeckTitle = async id => {
+  let deckObject = {
+    [id]: {
+      title: id,
+      questions: [],
+    }
+  };
 
-    await AsyncStorage.setItem(id, JSON.stringify(deckObject));
-
-  } catch (error) {
-    // Error saving data
-    console.log(error);
-  }
+  await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(deckObject));
+  getDecks();
 };
 
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
 export const addCardToDeck = (title, card) => {};
-
-export function submitEntry({ entry, key }) {
-  return AsyncStorage.mergeItem(
-    CALENDAR_STORAGE_KEY,
-    JSON.stringify({
-      [key]: entry,
-    })
-  );
-}
-
-export function removeEntry(key) {
-  return AsyncStorage.getItem(CALENDAR_STORAGE_KEY).then(results => {
-    const data = JSON.parse(results);
-    data[key] = undefined;
-    delete data[key];
-    AsyncStorage.setItem(CALENDAR_STORAGE_KEY, JSON.stringify(data));
-  });
-}
