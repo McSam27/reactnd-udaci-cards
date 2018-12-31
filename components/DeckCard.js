@@ -2,9 +2,9 @@ import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { RkCard } from "react-native-ui-kitten";
 
-export default function DeckCard({ title, totalQuestions, ...rest }) {
+export default function DeckCard({ title, totalQuestions, onPress, ...rest }) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <RkCard rkType="shadowed" style={styles.cardRoot} {...rest}>
         <View rkCardHeader>
           <Text style={styles.cardHeader}>{title}</Text>

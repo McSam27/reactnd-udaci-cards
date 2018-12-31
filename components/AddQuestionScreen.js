@@ -3,7 +3,7 @@ import { View, Text, Button, KeyboardAvoidingView, StyleSheet } from "react-nati
 import { RkButton, RkTextInput, RkText, } from "react-native-ui-kitten";
 import PageHeader from "./PageHeader";
 
-class AddNewQuizScreen extends React.Component {
+class AddQuestionScreen extends React.Component {
   render() {
     return (
       <View style={{
@@ -12,13 +12,14 @@ class AddNewQuizScreen extends React.Component {
         justifyContent: 'center',
         alignItems: 'stretch',
       }}>
-        <PageHeader>New Quiz</PageHeader>
+        <PageHeader>New Question</PageHeader>
         <View style={{flex: 1, marginTop: 24}}>
           <Text style={styles.text}>
-            What would you like to call your new quiz?
+            Add a new question for the "name" quiz
           </Text>
           <KeyboardAvoidingView>
-            <RkTextInput placeholder="New quiz name" style={styles.input} />
+            <RkTextInput placeholder="Question" style={styles.input} />
+            <RkTextInput placeholder="Answer" style={styles.input} />
           </KeyboardAvoidingView>
         </View>
         <View style={{marginBottom: 24}}>
@@ -47,4 +48,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddNewQuizScreen;
+export default AddQuestionScreen;
