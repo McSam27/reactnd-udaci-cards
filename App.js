@@ -4,6 +4,7 @@ import QuizScreen from './components/QuizScreen';
 import AddNewQuizScreen from './components/AddNewQuizScreen';
 import QuestionScreen from './components/QuestionScreen';
 import AddQuestionScreen from './components/AddQuestionScreen';
+import QuestionCard from './components/QuestionCard';
 
 const AppNavigator = createStackNavigator({
   Home: HomeScreen,

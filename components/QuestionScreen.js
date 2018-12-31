@@ -6,8 +6,9 @@ import {
   KeyboardAvoidingView,
   StyleSheet,
 } from "react-native";
-import { RkButton, RkCard } from "react-native-ui-kitten";
+import { RkButton, RkCard, RkText } from "react-native-ui-kitten";
 import PageHeader from "./PageHeader";
+import QuestionCard from "./QuestionCard";
 
 class AddNewQuizScreen extends React.Component {
   render() {
@@ -21,18 +22,10 @@ class AddNewQuizScreen extends React.Component {
         }}
       >
         <PageHeader>Question</PageHeader>
+
         <View style={styles.questionContainer}>
-          <RkCard rkType="shadowed">
-            <View rkCardHeader>
-              <Text>Question 2 of 5</Text>
-            </View>
-            <View rkCardContent>
-              <Text>Some question text</Text>
-            </View>
-            <View rkCardFooter>
-              <RkButton rkType="outline-warning">Show answer</RkButton>
-            </View>
-          </RkCard>
+          <RkText>Question 2 of 5</RkText>
+          <QuestionCard />
         </View>
         <View style={{ marginBottom: 24 }}>
           <RkButton rkType="success stretch" style={styles.button}>
