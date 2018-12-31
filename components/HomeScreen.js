@@ -39,16 +39,9 @@ class HomeScreen extends React.Component {
         <RkButton
           rkType="stretch"
           style={styles.button}
-          onPress={() => this.props.navigation.navigate("Details")}
+          onPress={() => this.props.navigation.navigate("Quiz")}
         >
           Quiz
-        </RkButton>
-        <RkButton
-          rkType="stretch"
-          style={styles.button}
-          onPress={() => this.props.navigation.navigate("IndividualQuiz")}
-        >
-          IndividualQuizScreen
         </RkButton>
         <RkButton
           rkType="stretch"
