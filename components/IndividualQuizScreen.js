@@ -7,18 +7,12 @@ class IndividualQuizScreen extends React.Component {
   render() {
     return (
       <View>
-        <PageHeader>Details Screen</PageHeader>
+        <PageHeader>IndividualQuiz Screen</PageHeader>
         <RkButton
-          title="Go to Details... again"
-          onPress={() => this.props.navigation.push('Details')}
-        />
-        <RkButton>
-            Submit
-        </RkButton>
-        <Button
-          title="Go back"
           onPress={() => this.props.navigation.goBack()}
-        />
+        >
+          Go back
+        </RkButton>
       </View>
     );
   }

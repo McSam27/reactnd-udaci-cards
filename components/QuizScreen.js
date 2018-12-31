@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Button } from "react-native";
 import PageHeader from "./PageHeader";
 
-class DetailsScreen extends React.Component {
+class QuizScreen extends React.Component {
   render() {
     return (
       <View>
@@ -17,11 +17,11 @@ class DetailsScreen extends React.Component {
         />
         <Button
           title="Go back"
-          onPress={() => this.props.navigation.goBack()}
+                    onPress={() => this.props.navigation.goBack()}
         />
       </View>
     );
   }
 }
 
-export default DetailsScreen;
+export default QuizScreen;

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Platform, StatusBar } from "react-native";
+import { StyleSheet, Text, View, Platform, StatusBar, ScrollView } from "react-native";
 import DeckCard from "./DeckCard";
 import PageHeader from "./PageHeader";
 import { RkButton, RkTheme } from "react-native-ui-kitten";
@@ -7,6 +7,9 @@ import { DarkTheme } from "../config/theme";
 
 class HomeScreen extends React.Component {
   render() {
+    RkTheme.setType("RkText", "hero", {
+      fontSize: 32,
+    });
     RkTheme.setType("RkText", "hero", {
       fontSize: 32,
     });
@@ -34,19 +37,22 @@ class HomeScreen extends React.Component {
         </View>
 
         <RkButton
-          style={styles.btn}
+          rkType="stretch"
+          style={styles.button}
           onPress={() => this.props.navigation.navigate("Details")}
         >
           Quiz
         </RkButton>
         <RkButton
-          style={styles.btn}
-          onPress={() => this.props.navigation.navigate("IndividualQuizScreen")}
+          rkType="stretch"
+          style={styles.button}
+          onPress={() => this.props.navigation.navigate("IndividualQuiz")}
         >
           IndividualQuizScreen
         </RkButton>
         <RkButton
-          style={styles.btn}
+          rkType="stretch"
+          style={styles.button}
           onPress={() => this.props.navigation.navigate("AddNewQuiz")}
         >
           AddNewQuiz
@@ -66,9 +72,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
   },
-  btn: {
+  button: {
     alignSelf: "center",
-    width: '100%',
     margin: 8,
   },
 });
