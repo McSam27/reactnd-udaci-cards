@@ -41,14 +41,14 @@ class HomeScreen extends React.Component {
           style={styles.button}
           onPress={() => this.props.navigation.navigate("Quiz")}
         >
-          Quiz
+          Quiz page
         </RkButton>
         <RkButton
-          rkType="stretch"
+          rkType="info stretch"
           style={styles.button}
           onPress={() => this.props.navigation.navigate("AddNewQuiz")}
         >
-          AddNewQuiz
+          Add new quiz
         </RkButton>
       </View>
     );
@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   button: {
-    alignSelf: "center",
     margin: 8,
   },
 });
