@@ -34,30 +34,32 @@ export const clearData = async () => {
   }
 };
 
+const saveDummyDecks = async () => {
+    return await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(DUMMY_DATA));
+}
 
 // return all of the decks along with their titles, questions, and answers.
-
 export const getDecks = () => {
   return AsyncStorage.getItem(STORAGE_KEY)
     .then(res => {
       if (res !== null) {
         return JSON.parse(res);
       } else {
+        saveDummyDecks();
         return DUMMY_DATA;
       }
     });
 }
 
 // take in a single id argument and return the deck associated with that id
-export const getDeck = async id => {
-  try {
-    const value = await AsyncStorage.getItem(STORAGE_KEY);
-    if (value !== null) {
-      return value[id];
-    }
-  } catch (error) {
-    // Error retrieving data
-  }
+export const getDeck = (id) => {
+  return AsyncStorage.getItem(STORAGE_KEY)
+  .then(res => {
+    if (res !== null) {
+        let parsed = JSON.parse(res);
+        return parsed[id];
+      }
+    });
 };
 
 // take in a single id argument and return the deck associated with that id
@@ -70,7 +72,6 @@ export const saveDeckTitle = async id => {
   };
 
   await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(deckObject));
-  getDecks();
 };
 
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.

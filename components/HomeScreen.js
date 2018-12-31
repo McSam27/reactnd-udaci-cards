@@ -49,7 +49,9 @@ class HomeScreen extends React.Component {
                 key={`${title}-quiz`}
                 title={title}
                 totalQuestions={questions.length}
-                onPress={() => this.props.navigation.navigate("Quiz")}
+                onPress={() => this.props.navigation.navigate("Quiz", {
+                  title: title,
+                })}
               />
             )
           })
