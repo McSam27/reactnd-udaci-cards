@@ -47,7 +47,9 @@ export default class DeckCard extends React.Component {
           <RkButton
             rkType="success stretch"
             style={styles.button}
-            onPress={() => this.props.navigation.navigate("Question")}
+            onPress={() => this.props.navigation.navigate("Question", {
+              quiz,
+            })}
           >
             Start
           </RkButton>

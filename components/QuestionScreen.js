@@ -11,7 +11,33 @@ import PageHeader from "./PageHeader";
 import QuestionCard from "./QuestionCard";
 
 class AddNewQuizScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    const quiz = this.props.navigation.getParam("quiz");
+    const totalQuestions = quiz.questions.length;
+    this.state = {
+      score: 0,
+      totalQuestions,
+      currentQuestion: 0,
+    };
+  }
+
+  handleNext = (incrementScore = 0) => {
+    // check if it is the last question
+    if(this.state.currentQuestion+1 === this.state.totalQuestions) {
+      this.props.navigation.navigate("QuizScore");
+      return;
+    }
+    this.setState(prevState => ({
+      score: prevState.score + incrementScore,
+      currentQuestion: prevState.currentQuestion + 1,
+    }));
+  };
+
   render() {
+    const { currentQuestion, score, totalQuestions } = this.state;
+    const { questions } = this.props.navigation.getParam("quiz");
+
     return (
       <View
         style={{
@@ -24,17 +50,25 @@ class AddNewQuizScreen extends React.Component {
         <PageHeader>Question</PageHeader>
 
         <View style={styles.questionContainer}>
-          <RkText>Question 2 of 5</RkText>
-          <QuestionCard />
+          <QuestionCard
+            currentQuestion={currentQuestion + 1}
+            totalQuestions={totalQuestions}
+            questionText={questions[currentQuestion].question}
+            answerText={questions[currentQuestion].answer}
+          />
         </View>
         <View style={{ marginBottom: 24 }}>
-          <RkButton rkType="success stretch" style={styles.button}>
+          <RkButton
+            rkType="success stretch"
+            style={styles.button}
+            onPress={() => this.handleNext(1)}
+          >
             Correct
           </RkButton>
           <RkButton
             rkType="danger stretch"
             style={styles.button}
-            onPress={() => this.props.navigation.goBack()}
+            onPress={() => this.handleNext()}
           >
             Incorrect
           </RkButton>

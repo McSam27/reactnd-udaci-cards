@@ -4,7 +4,7 @@ import QuizScreen from './components/QuizScreen';
 import AddNewQuizScreen from './components/AddNewQuizScreen';
 import QuestionScreen from './components/QuestionScreen';
 import AddQuestionScreen from './components/AddQuestionScreen';
-import QuestionCard from './components/QuestionCard';
+import QuizScoreScreen from './components/QuizScoreScreen';
 
 const AppNavigator = createStackNavigator({
   Home: HomeScreen,
@@ -12,6 +12,7 @@ const AppNavigator = createStackNavigator({
   AddNewQuiz: AddNewQuizScreen,
   AddQuestion: AddQuestionScreen,
   Question: QuestionScreen,
+  QuizScore: QuizScoreScreen,
 });
 
 export default createAppContainer(AppNavigator);

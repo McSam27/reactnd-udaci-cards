@@ -49,11 +49,18 @@ class AddNewQuizScreen extends React.Component {
       transform: [{ rotateY: this.backInterpolate }],
     };
 
+    const {
+      currentQuestion,
+      totalQuestions,
+      questionText,
+      answerText
+    } = this.props;
+
     return (
       <RkCard rkType="shadowed" style={styles.container}>
         <View>
           <View rkCardHeader>
-            <Text>Question 2 of 5</Text>
+            <Text>Question {currentQuestion.toString()} of {totalQuestions.toString()}</Text>
           </View>
           <RkCard rkType="shadowed">
             <Animated.View
@@ -63,7 +70,7 @@ class AddNewQuizScreen extends React.Component {
               <Text style={styles.flipText}>
                 Question:
                 {"\n"}
-                question text here
+                {questionText}
               </Text>
             </Animated.View>
             <Animated.View
@@ -73,16 +80,16 @@ class AddNewQuizScreen extends React.Component {
               <Text style={styles.flipText}>
                 Answer:
                 {"\n"}
-                answer text here
+                {answerText}
               </Text>
             </Animated.View>
           </RkCard>
-          <View rkCardFooter>
+        </View>
+          <View>
             <RkButton rkType="outline-warning" onPress={() => this.flipCard()}>
               Show answer
             </RkButton>
           </View>
-        </View>
       </RkCard>
     );
   }
@@ -95,16 +102,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   flipCard: {
-    // alignItems: "center",
-    // justifyContent: "center",
     backfaceVisibility: "hidden",
+    height: 300,
   },
   flipCardBack: {
     position: "absolute",
     top: 0,
   },
   flipText: {
-    // fontSize: 20,
     fontWeight: "bold",
   },
 });
