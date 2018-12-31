@@ -10,7 +10,6 @@ import {
 import DeckCard from "./DeckCard";
 import PageHeader from "./PageHeader";
 import { RkButton, RkTheme } from "react-native-ui-kitten";
-import { DarkTheme } from "../config/theme";
 
 class HomeScreen extends React.Component {
   render() {
@@ -24,28 +23,12 @@ class HomeScreen extends React.Component {
       backgroundColor: "#ffffff",
     });
 
-    // StatusBar.setBarStyle('light-content', true);
-    // if (Platform.OS === 'android') {
-    //   StatusBar.setBackgroundColor(DarkTheme.colors.screen.base);
-    // }
-    // RkTheme.setTheme(DarkTheme);
-
     return (
       <View style={styles.container}>
         <PageHeader>FlashQuiz</PageHeader>
         <View style={styles.grid}>
           <DeckCard
             title={"Quiz One"}
-            totalQuestions={5}
-            onPress={() => this.props.navigation.navigate("Quiz")}
-          />
-          <DeckCard
-            title={"Quiz Two"}
-            totalQuestions={5}
-            onPress={() => this.props.navigation.navigate("Quiz")}
-          />
-          <DeckCard
-            title={"Long Quiz Name"}
             totalQuestions={5}
             onPress={() => this.props.navigation.navigate("Quiz")}
           />
@@ -82,8 +65,7 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   newQuizButton: {
-    margin: 8,
-    marginBottom: 24,
+    margin: 24,
   },
 });
 
