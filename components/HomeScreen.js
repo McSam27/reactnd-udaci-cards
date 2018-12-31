@@ -10,9 +10,20 @@ import {
 import DeckCard from "./DeckCard";
 import PageHeader from "./PageHeader";
 import { RkButton, RkTheme } from "react-native-ui-kitten";
+import { getDecks, saveDeckTitle, clearData, getDeck } from '../utils/api';
 
 class HomeScreen extends React.Component {
+
+  componentDidMount = () => {
+    // clearData();
+  }
+
+
   render() {
+
+    getDecks();
+    getDeck("Test");
+
     RkTheme.setType("RkText", "hero", {
       fontSize: 32,
     });
@@ -29,11 +40,6 @@ class HomeScreen extends React.Component {
         <View style={styles.grid}>
           <DeckCard
             title={"Quiz One"}
-            totalQuestions={5}
-            onPress={() => this.props.navigation.navigate("Quiz")}
-          />
-          <DeckCard
-            title={"Introduction to Math with Calculus II"}
             totalQuestions={5}
             onPress={() => this.props.navigation.navigate("Quiz")}
           />

@@ -1,29 +1,45 @@
 import React from "react";
 import { View, Text, Button, KeyboardAvoidingView, StyleSheet } from "react-native";
-import { RkButton, RkTextInput, RkText, } from "react-native-ui-kitten";
+import { RkButton, RkTextInput, } from "react-native-ui-kitten";
 import PageHeader from "./PageHeader";
+import { saveDeckTitle, getDecks } from '../utils/api';
 
 class AddNewQuizScreen extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {text: ''};
+  }
+
+  handleText = (text) => {
+    this.setState({text})
+  }
+
+  handleCreateDeck = () => {
+    const { text } = this.state;
+    if (text.length !== 0) {
+      saveDeckTitle(text)
+        .then(() => {
+          this.props.navigation.navigate('Home');
+        });
+    }
+  }
+
   render() {
     return (
-      <View style={{
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'stretch',
-      }}>
+      <View style={styles.container}>
         <PageHeader>New Quiz</PageHeader>
         <View style={{flex: 1, marginTop: 24}}>
           <Text style={styles.text}>
             What would you like to call your new quiz?
           </Text>
           <KeyboardAvoidingView>
-            <RkTextInput placeholder="New quiz name" style={styles.input} />
+            <RkTextInput placeholder="New quiz name" style={styles.input} onChangeText={(text) => this.handleText(text)} />
           </KeyboardAvoidingView>
         </View>
         <View style={{marginBottom: 24}}>
-          <RkButton rkType="stretch" style={styles.button} >
-            Add
+          <RkButton rkType="stretch" style={styles.button} onPress={() => this.handleCreateDeck()}>
+            Create Deck
           </RkButton>
           <RkButton rkType="outline stretch" style={styles.button} onPress={() => this.props.navigation.goBack()} >Go back</RkButton>
         </View>
@@ -33,6 +49,12 @@ class AddNewQuizScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+  },
   text: {
     fontSize: 16,
     textAlign: 'center',
