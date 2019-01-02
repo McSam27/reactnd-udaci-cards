@@ -9,6 +9,10 @@ import {
 import { RkButton, RkCard } from "react-native-ui-kitten";
 
 class AddNewQuizScreen extends React.Component {
+  state = {
+    showQuestion: true,
+  };
+
   componentWillMount() {
     this.animatedValue = new Animated.Value(0);
     this.value = 0;
@@ -26,6 +30,7 @@ class AddNewQuizScreen extends React.Component {
   }
 
   flipCard() {
+    this.setState(prevState => ({showQuestion: !prevState.showQuestion}));
     if (this.value >= 90) {
       Animated.spring(this.animatedValue, {
         toValue: 0,
@@ -83,13 +88,25 @@ class AddNewQuizScreen extends React.Component {
                 {answerText}
               </Text>
             </Animated.View>
+            <View style={styles.btnContainer}>
+            {
+              this.state.showQuestion
+              ? (
+                <RkButton rkType="outline-warning" onPress={() => this.flipCard()}>
+                  Show answer
+                </RkButton>
+              )
+              :
+              (
+                <RkButton rkType="outline" onPress={() => this.flipCard()}>
+                  Show question
+                </RkButton>
+              )
+            }
+            </View>
           </RkCard>
         </View>
-          <View>
-            <RkButton rkType="outline-warning" onPress={() => this.flipCard()}>
-              Show answer
-            </RkButton>
-          </View>
+
       </View>
     );
   }
@@ -100,6 +117,11 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignItems: "center",
     // justifyContent: "center",
+  },
+  btnContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 16,
   },
   centeredText: {
     textAlign: 'center',

@@ -16,10 +16,8 @@ class AddNewQuizScreen extends React.Component {
     return (
       <View style={styles.container}>
         <PageHeader>Score Page</PageHeader>
-        <View style={{flex: 1, marginTop: 24}}>
-          <View>
-              <Text>You got a {score} out of {totalQuestions}.</Text>
-          </View>
+        <View style={styles.container}>
+          <Text style={styles.text}>You got a {score} out of {totalQuestions}.</Text>
         </View>
         <View style={{marginBottom: 24}}>
           <RkButton rkType="stretch" style={styles.button} onPress={() => this.props.navigation.pop(1)}>
@@ -40,7 +38,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
   },
   text: {
-    fontSize: 16,
+    fontSize: 24,
     textAlign: 'center',
   },
   input: {
