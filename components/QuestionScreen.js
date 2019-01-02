@@ -10,7 +10,7 @@ import { RkButton, RkCard, RkText } from "react-native-ui-kitten";
 import PageHeader from "./PageHeader";
 import QuestionCard from "./QuestionCard";
 
-class AddNewQuizScreen extends React.Component {
+class QuestionScreen extends React.Component {
   constructor(props) {
     super(props);
     const quiz = this.props.navigation.getParam("quiz");
@@ -23,9 +23,18 @@ class AddNewQuizScreen extends React.Component {
   }
 
   handleNext = (incrementScore = 0) => {
+    const { currentQuestion, totalQuestions, score } = this.state;
     // check if it is the last question
-    if(this.state.currentQuestion+1 === this.state.totalQuestions) {
-      this.props.navigation.navigate("QuizScore");
+    if(currentQuestion + 1 === totalQuestions) {
+      const quiz = this.props.navigation.getParam("quiz");
+      this.setState(prevState => ({
+        score: prevState.score + incrementScore,
+      }));
+      this.props.navigation.navigate("QuizScore", {
+        totalQuestions,
+        score: score + incrementScore,
+        quiz,
+      });
       return;
     }
     this.setState(prevState => ({
@@ -35,7 +44,7 @@ class AddNewQuizScreen extends React.Component {
   };
 
   render() {
-    const { currentQuestion, score, totalQuestions } = this.state;
+    const { currentQuestion, totalQuestions } = this.state;
     const { questions } = this.props.navigation.getParam("quiz");
 
     return (
@@ -98,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddNewQuizScreen;
+export default QuestionScreen;

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Button, KeyboardAvoidingView, StyleSheet } from "react-native";
 import { RkButton, RkTextInput, } from "react-native-ui-kitten";
 import PageHeader from "./PageHeader";
-import { saveDeckTitle, getDecks } from '../utils/api';
+import { NavigationActions } from 'react-navigation';
 
 class AddNewQuizScreen extends React.Component {
 
@@ -11,19 +11,21 @@ class AddNewQuizScreen extends React.Component {
   }
 
   render() {
+    const { score, totalQuestions, quiz } = this.props.navigation.state.params;
+
     return (
       <View style={styles.container}>
         <PageHeader>Score Page</PageHeader>
         <View style={{flex: 1, marginTop: 24}}>
           <View>
-              <Text>You got a =347982 score.</Text>
+              <Text>You got a {score} out of {totalQuestions}.</Text>
           </View>
         </View>
         <View style={{marginBottom: 24}}>
-          <RkButton rkType="stretch" style={styles.button} onPress={() => this.handleCreateDeck()}>
+          <RkButton rkType="stretch" style={styles.button} onPress={() => this.props.navigation.pop(1)}>
             Restart Quiz
           </RkButton>
-          <RkButton rkType="outline stretch" style={styles.button} onPress={() => this.props.navigation.goBack()} >Go to Deck</RkButton>
+          <RkButton rkType="outline stretch" style={styles.button} onPress={() => this.props.navigation.pop(2)} >Go to Deck</RkButton>
         </View>
       </View>
     );

@@ -57,12 +57,12 @@ class AddNewQuizScreen extends React.Component {
     } = this.props;
 
     return (
-      <RkCard rkType="shadowed" style={styles.container}>
+      <View style={styles.container}>
         <View>
-          <View rkCardHeader>
+          <View rkCardHeader style={styles.centeredText}>
             <Text>Question {currentQuestion.toString()} of {totalQuestions.toString()}</Text>
           </View>
-          <RkCard rkType="shadowed">
+          <RkCard style={styles.cardRoot}>
             <Animated.View
               rkCardContent
               style={[styles.flipCard, frontAnimatedStyle]}
@@ -90,7 +90,7 @@ class AddNewQuizScreen extends React.Component {
               Show answer
             </RkButton>
           </View>
-      </RkCard>
+      </View>
     );
   }
 }
@@ -98,8 +98,15 @@ class AddNewQuizScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
+  },
+  centeredText: {
+    textAlign: 'center',
+  },
+  cardRoot: {
+    width: '100%',
+
   },
   flipCard: {
     backfaceVisibility: "hidden",
