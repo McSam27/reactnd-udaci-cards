@@ -29,6 +29,7 @@ class AddQuestionScreen extends React.Component {
         answer: answer.trim(),
       };
       addCardToDeck(title, card)
+        .then(() => this.props.navigation.navigate("Quiz", {quiz: title}));
     }
   }
 

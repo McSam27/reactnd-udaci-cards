@@ -30,12 +30,12 @@ class HomeScreen extends React.Component {
   }
 
   async componentDidMount () {
+    console.log('called');
     let decks = await getDecks();
     this.setState({ decks });
   }
 
   render() {
-
     const { decks } = this.state;
 
     return (
@@ -43,7 +43,13 @@ class HomeScreen extends React.Component {
         <PageHeader>FlashQuiz</PageHeader>
         <View style={styles.grid}>
         {
-          Object.keys(decks).map(deck => {
+          Object.keys(decks).length === 0
+          ? (
+            <View style={{alignSelf: 'center',}}>
+              <Text style={{fontSize: 14, textAlign: 'center',}}>No card decks to show, go create one!</Text>
+            </View>
+          )
+          : Object.keys(decks).map(deck => {
             const {title, questions} = decks[deck];
             return (
               <DeckCard

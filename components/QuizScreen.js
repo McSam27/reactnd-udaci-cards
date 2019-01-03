@@ -23,6 +23,10 @@ export default class DeckCard extends React.Component {
     this.props.navigation.navigate('Home');
   }
 
+  startQuiz () {
+    this.state.quiz.questions.length > 0 && this.props.navigation.navigate("Question", {quiz,});
+  }
+
   render() {
     const { navigation } = this.props;
     const { quiz } = this.state;
@@ -53,9 +57,7 @@ export default class DeckCard extends React.Component {
           <RkButton
             rkType="success stretch"
             style={styles.button}
-            onPress={() => this.props.navigation.navigate("Question", {
-              quiz,
-            })}
+            onPress={() => this.startQuiz()}
           >
             Start
           </RkButton>
