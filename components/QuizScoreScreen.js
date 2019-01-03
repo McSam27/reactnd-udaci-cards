@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Button, KeyboardAvoidingView, StyleSheet } from "react-native";
 import { RkButton, RkTextInput, } from "react-native-ui-kitten";
 import PageHeader from "./PageHeader";
-import { clearLocalNotification } from '../utils/notifications'
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
 
 class AddNewQuizScreen extends React.Component {
 
@@ -10,8 +10,9 @@ class AddNewQuizScreen extends React.Component {
     super(props);
   }
 
-  async componentDidMount() {
-    await clearLocalNotification();
+  componentDidMount() {
+    clearLocalNotification()
+      .then(setLocalNotification());
   }
 
   render() {
