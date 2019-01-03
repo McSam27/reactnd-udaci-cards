@@ -13,47 +13,11 @@ class AddNewQuizScreen extends React.Component {
     showQuestion: true,
   };
 
-  componentWillMount() {
-    this.animatedValue = new Animated.Value(0);
-    this.value = 0;
-    this.animatedValue.addListener(({ value }) => {
-      this.value = value;
-    });
-    this.frontInterpolate = this.animatedValue.interpolate({
-      inputRange: [0, 180],
-      outputRange: ["0deg", "180deg"],
-    });
-    this.backInterpolate = this.animatedValue.interpolate({
-      inputRange: [0, 180],
-      outputRange: ["180deg", "360deg"],
-    });
-  }
-
   flipCard() {
     this.setState(prevState => ({showQuestion: !prevState.showQuestion}));
-    if (this.value >= 90) {
-      Animated.spring(this.animatedValue, {
-        toValue: 0,
-        friction: 8,
-        tension: 10,
-      }).start();
-    } else {
-      Animated.spring(this.animatedValue, {
-        toValue: 180,
-        friction: 8,
-        tension: 10,
-      }).start();
-    }
   }
 
   render() {
-    const frontAnimatedStyle = {
-      transform: [{ rotateY: this.frontInterpolate }],
-    };
-    const backAnimatedStyle = {
-      transform: [{ rotateY: this.backInterpolate }],
-    };
-
     const {
       currentQuestion,
       totalQuestions,
@@ -68,26 +32,33 @@ class AddNewQuizScreen extends React.Component {
             <Text>Question {currentQuestion.toString()} of {totalQuestions.toString()}</Text>
           </View>
           <RkCard style={styles.cardRoot}>
-            <Animated.View
-              rkCardContent
-              style={[styles.flipCard, frontAnimatedStyle]}
-            >
-              <Text style={styles.flipText}>
-                Question:
-                {"\n"}
-                {questionText}
-              </Text>
-            </Animated.View>
-            <Animated.View
-              rkCardContent
-              style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}
-            >
-              <Text style={styles.flipText}>
-                Answer:
-                {"\n"}
-                {answerText}
-              </Text>
-            </Animated.View>
+          {
+            this.state.showQuestion
+            ?
+              <View
+                rkCardContent
+                style={[styles.card]}
+              >
+                <Text style={styles.contentHeaders}>
+                  Question:
+                </Text>
+                <Text style={styles.cardText}>
+                  {questionText}
+                </Text>
+              </View>
+            :
+              <View
+                rkCardContent
+                style={styles.card}
+              >
+                <Text style={styles.contentHeaders}>
+                  Answer:
+                </Text>
+                <Text style={styles.cardText}>
+                  {answerText}
+                </Text>
+              </View>
+          }
             <View style={styles.btnContainer}>
             {
               this.state.showQuestion
@@ -115,31 +86,32 @@ class AddNewQuizScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   btnContainer: {
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 16,
   },
+  contentHeaders: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
   centeredText: {
     textAlign: 'center',
+    alignItems: "center",
+    marginBottom: 4,
   },
   cardRoot: {
     width: '100%',
-
   },
-  flipCard: {
-    backfaceVisibility: "hidden",
+  card: {
+    justifyContent: "center",
     height: 300,
   },
-  flipCardBack: {
-    position: "absolute",
-    top: 0,
-  },
-  flipText: {
-    fontWeight: "bold",
+  cardText: {
+    fontSize: 16,
   },
 });
 
