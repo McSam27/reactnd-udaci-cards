@@ -30,9 +30,15 @@ class HomeScreen extends React.Component {
   }
 
   async componentDidMount () {
-    console.log('called');
     let decks = await getDecks();
     this.setState({ decks });
+  }
+
+  async componentDidUpdate(prevState) {
+    let decks = await getDecks();
+    if (decks !== prevState.decks) {
+      this.setState({ decks });
+    }
   }
 
   render() {
@@ -88,6 +94,7 @@ const styles = StyleSheet.create({
     margin: 4,
     flexDirection: "row",
     flexWrap: "wrap",
+    justifyContent: 'center',
     flex: 2,
   },
   newQuizButton: {

@@ -12,6 +12,7 @@ class AddNewQuizScreen extends React.Component {
 
   render() {
     const { score, totalQuestions, quiz } = this.props.navigation.state.params;
+    const { navigation } = this.props;
 
     return (
       <View style={styles.container}>
@@ -20,10 +21,10 @@ class AddNewQuizScreen extends React.Component {
           <Text style={styles.text}>You got a {score} out of {totalQuestions}.</Text>
         </View>
         <View style={{marginBottom: 24}}>
-          <RkButton rkType="stretch" style={styles.button} onPress={() => this.props.navigation.pop(1)}>
+          <RkButton rkType="stretch" style={styles.button} onPress={() => navigation.replace('Question', { quiz, score: 0, currentQuestion: 0 })}>
             Restart Quiz
           </RkButton>
-          <RkButton rkType="outline stretch" style={styles.button} onPress={() => this.props.navigation.pop(2)} >Go to Deck</RkButton>
+          <RkButton rkType="outline stretch" style={styles.button} onPress={() => navigation.replace('Quiz', { title: quiz.title })} >Go to Deck</RkButton>
         </View>
       </View>
     );

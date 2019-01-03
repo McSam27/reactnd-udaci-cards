@@ -17,6 +17,14 @@ export default class DeckCard extends React.Component {
     this.setState({ quiz });
   }
 
+  async componentDidUpdate(prevState) {
+    const quizTitle = this.props.navigation.getParam("title");
+    const quiz = await getDeck(quizTitle);
+    if (quiz !== prevState.quiz) {
+      this.setState({ quiz });
+    }
+  }
+
   async deleteQuiz () {
     const quizTitle = this.props.navigation.getParam("title");
     await deleteDeck(quizTitle);
@@ -24,14 +32,15 @@ export default class DeckCard extends React.Component {
   }
 
   startQuiz () {
-    this.state.quiz.questions.length > 0 && this.props.navigation.navigate("Question", {quiz,});
+    const { quiz } = this.state;
+    quiz.questions == undefined|| quiz.questions.length > 0 && this.props.navigation.navigate("Question", {quiz});
   }
 
   render() {
+
     const { navigation } = this.props;
     const { quiz } = this.state;
     const title = navigation.getParam("title", "Error in retrieving quiz name");
-
     const length = quiz.questions !== undefined ? quiz.questions.length.toString() : "0";
 
     return (
