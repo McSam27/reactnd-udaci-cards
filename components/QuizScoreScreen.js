@@ -2,12 +2,16 @@ import React from "react";
 import { View, Text, Button, KeyboardAvoidingView, StyleSheet } from "react-native";
 import { RkButton, RkTextInput, } from "react-native-ui-kitten";
 import PageHeader from "./PageHeader";
-import { NavigationActions } from 'react-navigation';
+import { clearLocalNotification } from '../utils/notifications'
 
 class AddNewQuizScreen extends React.Component {
 
   constructor(props) {
     super(props);
+  }
+
+  async componentDidMount() {
+    await clearLocalNotification();
   }
 
   render() {

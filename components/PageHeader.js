@@ -13,7 +13,7 @@ export default function DeckCard({ children }) {
 const styles = StyleSheet.create({
   text: {
     textAlign: "center",
-    marginTop: 8,
+    marginTop: 80,
     marginBottom: 8,
   }
 });

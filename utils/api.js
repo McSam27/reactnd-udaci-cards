@@ -2,7 +2,7 @@ import {
   AsyncStorage
 } from "react-native";
 
-const STORAGE_KEY = "@UdaciCardStore:quiz";
+const DECK_STORAGE_KEY = "@UdaciCardStore:quiz";
 
 const DUMMY_DATA = {
   React: {
@@ -26,6 +26,10 @@ const DUMMY_DATA = {
   }
 };
 
+export const getGetKeys = async () => {
+  await AsyncStorage.getAllKeys().then(console.log);
+}
+
 export const clearData = async () => {
   try {
     await AsyncStorage.clear();
@@ -35,12 +39,12 @@ export const clearData = async () => {
 };
 
 const saveDummyDecks = async () => {
-    return await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(DUMMY_DATA));
+    return await AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(DUMMY_DATA));
 }
 
 // return all of the decks along with their titles, questions, and answers.
 export const getDecks = () => {
-  return AsyncStorage.getItem(STORAGE_KEY)
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then(res => {
       if (res !== null) {
         // console.log(JSON.parse(res));
@@ -54,7 +58,7 @@ export const getDecks = () => {
 
 // take in a single id argument and return the deck associated with that id
 export const getDeck = (id) => {
-  return AsyncStorage.getItem(STORAGE_KEY)
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
   .then(res => {
     if (res !== null) {
         let parsed = JSON.parse(res);
@@ -65,14 +69,14 @@ export const getDeck = (id) => {
 
 // take in a single id argument and delete the deck associated with that id
 export const deleteDeck = (id) => {
-  return AsyncStorage.getItem(STORAGE_KEY)
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
   .then(results => {
     // get decks
       const decks = JSON.parse(results);
       // remove deck
       delete decks[id];
       // set storage to decks with deleted key
-      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
+      AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks));
     });
 };
 
@@ -85,15 +89,15 @@ export const saveDeckTitle = async id => {
     }
   };
 
-  await AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(deckObject));
+  await AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(deckObject));
 };
 
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
 export const addCardToDeck = async (title, card) => {
-  await AsyncStorage.getItem(STORAGE_KEY)
+  await AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then((results) => {
       const decks = JSON.parse(results);
       decks[title].questions.push(card);
-      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
+      AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks));
     })
 };

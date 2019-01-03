@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { RkCard, RkButton } from "react-native-ui-kitten";
 import { getDeck, deleteDeck } from "../utils/api";
+import PageHeader from "./PageHeader";
 
 export default class DeckCard extends React.Component {
   constructor() {
@@ -44,7 +45,9 @@ export default class DeckCard extends React.Component {
           alignItems: "stretch",
         }}
       >
-        <View style={{ flex: 2, marginTop: 24, justifyContent: "center" }}>
+        <PageHeader>Quiz Page</PageHeader>
+
+        <View style={{ flex: 1, marginTop: 24, justifyContent: "center" }}>
           <RkCard rkType="shadowed" style={styles.cardRoot}>
             <View rkCardHeader>
               <Text style={styles.quizCardHeader}>{title}</Text>
@@ -54,7 +57,7 @@ export default class DeckCard extends React.Component {
             </View>
           </RkCard>
         </View>
-        <View style={{ flex: 1 }}>
+        <View style={{ marginBottom: 16 }}>
           <RkButton
             rkType="success stretch"
             style={styles.button}
@@ -78,6 +81,14 @@ export default class DeckCard extends React.Component {
           >
             Delete
           </RkButton>
+          <RkButton
+            rkType="outline stretch"
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate('Home')}
+          >
+              Go back
+          </RkButton>
+
         </View>
       </View>
     );
