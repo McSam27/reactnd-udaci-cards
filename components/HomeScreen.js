@@ -7,7 +7,7 @@ import {
 import DeckCard from "./DeckCard";
 import PageHeader from "./PageHeader";
 import { RkButton, RkTheme } from "react-native-ui-kitten";
-import { getDecks, getGetKeys } from '../utils/api';
+import { getDecks } from '../utils/api';
 import { setLocalNotification } from '../utils/notifications'
 
 RkTheme.setType("RkText", "hero", {
@@ -28,7 +28,6 @@ class HomeScreen extends React.Component {
 
   async componentDidMount () {
     setLocalNotification();
-    getGetKeys();
     let decks = await getDecks();
     this.setState({ decks });
   }

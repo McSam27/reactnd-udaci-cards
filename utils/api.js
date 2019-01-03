@@ -26,13 +26,9 @@ const DUMMY_DATA = {
   }
 };
 
-export const getGetKeys = async () => {
-  await AsyncStorage.getAllKeys().then(console.log);
-}
-
 export const clearData = async () => {
   try {
-    await AsyncStorage.clear();
+    await AsyncStorage.removeItem(DECK_STORAGE_KEY);
   } catch (error) {
     console.log(error);
   }
@@ -47,7 +43,6 @@ export const getDecks = () => {
   return AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then(res => {
       if (res !== null) {
-        // console.log(JSON.parse(res));
         return JSON.parse(res);
       } else {
         saveDummyDecks();
