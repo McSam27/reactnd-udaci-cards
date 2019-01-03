@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Button, KeyboardAvoidingView, StyleSheet } from "react-native";
 import { RkButton, RkTextInput, } from "react-native-ui-kitten";
 import PageHeader from "./PageHeader";
-import { saveDeckTitle, getDecks } from '../utils/api';
+import { saveDeckTitle } from '../utils/api';
 
 class AddNewQuizScreen extends React.Component {
 

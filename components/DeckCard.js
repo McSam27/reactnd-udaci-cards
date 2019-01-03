@@ -21,11 +21,11 @@ export default function DeckCard({ title, totalQuestions, onPress, ...rest }) {
 
 const styles = StyleSheet.create({
   cardRoot: {
-    maxWidth: 150,
+    maxWidth: 140,
     margin: 4,
   },
   cardHeader: {
-    fontSize: 16,
+    fontSize: 14,
   },
   cardContent: {
     fontSize: 12,

@@ -56,7 +56,9 @@ export default class DeckCard extends React.Component {
           <RkButton
             rkType="stretch"
             style={styles.button}
-            onPress={() => this.props.navigation.navigate("AddQuestion")}
+            onPress={() => this.props.navigation.navigate("AddQuestion", {
+              title: quiz.title
+            })}
           >
             Add new question
           </RkButton>

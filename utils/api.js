@@ -43,6 +43,7 @@ export const getDecks = () => {
   return AsyncStorage.getItem(STORAGE_KEY)
     .then(res => {
       if (res !== null) {
+        // console.log(JSON.parse(res));
         return JSON.parse(res);
       } else {
         saveDummyDecks();
@@ -75,4 +76,13 @@ export const saveDeckTitle = async id => {
 };
 
 // take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
-export const addCardToDeck = (title, card) => {};
+export const addCardToDeck = (title, card) => {
+  AsyncStorage.getItem(STORAGE_KEY)
+    .then((results) => {
+      const decks = JSON.parse(results);
+      decks[title].questions.push(card);
+      console.log(decks[title])
+      console.log(decks[title].questions)
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks))
+    })
+};

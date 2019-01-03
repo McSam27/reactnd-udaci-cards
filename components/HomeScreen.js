@@ -10,7 +10,7 @@ import {
 import DeckCard from "./DeckCard";
 import PageHeader from "./PageHeader";
 import { RkButton, RkTheme } from "react-native-ui-kitten";
-import { getDecks, } from '../utils/api';
+import { getDecks, clearData } from '../utils/api';
 
 
 RkTheme.setType("RkText", "hero", {
