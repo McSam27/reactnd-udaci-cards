@@ -9,9 +9,9 @@ To get it up and running just run the following instructions:
 * Install all project dependencies with `yarn install`
 * Launch the app with `yarn start`
 
-## Requirements
+## Development
 
-The app was tested and developed using an iOS iPhone X simulator running `11.2` and might not work or look that well on Android devices.
+The app was tested and developed using an iOS iPhone X simulator running `11.2` and a physical Pixel 2 (Android Pie).
 
 ### api.js
 
