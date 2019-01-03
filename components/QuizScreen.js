@@ -26,7 +26,7 @@ export default class DeckCard extends React.Component {
 
   startQuiz () {
     const { quiz } = this.state;
-    quiz.questions == undefined|| quiz.questions.length > 0 && this.props.navigation.navigate("Question", {quiz});
+    quiz.questions == undefined|| quiz.questions.length > 0 && this.props.navigation.replace("Question", {quiz});
   }
 
   render() {

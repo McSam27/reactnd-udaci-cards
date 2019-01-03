@@ -15,7 +15,6 @@ class QuestionScreen extends React.Component {
     super(props);
     const quiz = this.props.navigation.getParam("quiz");
     const totalQuestions = quiz.questions.length;
-    const { score, currentQuestion } = this.props.navigation.state.params;
 
     this.state = {
       score: 0,

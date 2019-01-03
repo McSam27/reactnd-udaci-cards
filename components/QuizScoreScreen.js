@@ -25,7 +25,7 @@ class AddNewQuizScreen extends React.Component {
           <Text style={styles.text}>You got a {score} out of {totalQuestions}.</Text>
         </View>
         <View style={{marginBottom: 24}}>
-          <RkButton rkType="stretch" style={styles.button} onPress={() => navigation.replace('Question', { quiz, score: 0, currentQuestion: 0 })}>
+          <RkButton rkType="stretch" style={styles.button} onPress={() => navigation.replace('Question', { quiz })}>
             Restart Quiz
           </RkButton>
           <RkButton rkType="outline stretch" style={styles.button} onPress={() => navigation.replace('Quiz', { title: quiz.title })} >Go to Deck</RkButton>
