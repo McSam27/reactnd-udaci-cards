@@ -63,6 +63,19 @@ export const getDeck = (id) => {
     });
 };
 
+// take in a single id argument and delete the deck associated with that id
+export const deleteDeck = (id) => {
+  return AsyncStorage.getItem(STORAGE_KEY)
+  .then(results => {
+    // get decks
+      const decks = JSON.parse(results);
+      // remove deck
+      delete decks[id];
+      // set storage to decks with deleted key
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
+    });
+};
+
 // take in a single id argument and return the deck associated with that id
 export const saveDeckTitle = async id => {
   let deckObject = {
@@ -81,8 +94,6 @@ export const addCardToDeck = (title, card) => {
     .then((results) => {
       const decks = JSON.parse(results);
       decks[title].questions.push(card);
-      console.log(decks[title])
-      console.log(decks[title].questions)
-      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks))
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
     })
 };

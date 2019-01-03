@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { RkCard, RkButton } from "react-native-ui-kitten";
-import { getDeck } from "../utils/api";
+import { getDeck, deleteDeck } from "../utils/api";
 
 export default class DeckCard extends React.Component {
   constructor() {
@@ -13,8 +13,14 @@ export default class DeckCard extends React.Component {
 
   async componentDidMount() {
     const quizTitle = this.props.navigation.getParam("title");
-    let quiz = await getDeck(quizTitle);
+    const quiz = await getDeck(quizTitle);
     this.setState({ quiz });
+  }
+
+  async deleteQuiz () {
+    const quizTitle = this.props.navigation.getParam("title");
+    await deleteDeck(quizTitle);
+    this.props.navigation.navigate('Home');
   }
 
   render() {
@@ -65,7 +71,7 @@ export default class DeckCard extends React.Component {
           <RkButton
             rkType="danger stretch"
             style={styles.button}
-            onPress={null}
+            onPress={() => this.deleteQuiz()}
           >
             Delete
           </RkButton>
