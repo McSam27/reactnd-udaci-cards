@@ -17,14 +17,6 @@ export default class DeckCard extends React.Component {
     this.setState({ quiz });
   }
 
-  async componentDidUpdate(prevState) {
-    const quizTitle = this.props.navigation.getParam("title");
-    const quiz = await getDeck(quizTitle);
-    if (quiz !== prevState.quiz) {
-      this.setState({ quiz });
-    }
-  }
-
   async deleteQuiz () {
     const quizTitle = this.props.navigation.getParam("title");
     await deleteDeck(quizTitle);
